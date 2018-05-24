@@ -12,6 +12,8 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
+var version string
+
 var (
 	app            = kingpin.New("zsh-log-refresh", "A zsh-log-refresh application.")
 	limit          = app.Flag("l", "log refresh limit").Default("500").Int()
@@ -35,6 +37,12 @@ func addog(text string, filename string) {
 }
 
 func main() {
+	app.HelpFlag.Short('h')
+	app.Version(fmt.Sprint("zsh-log-refresh's version: ", version))
+	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
+	//
+	}
+
 	var files = dirwalk(*logDir)
 
 	sort.Slice(files, func(i, j int) bool {
