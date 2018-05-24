@@ -12,8 +12,8 @@ import (
 
 const (
 	LIMIT      = 500
-	LOG_FILE   = "./err.log"
-	LOG_DIR    = "../"
+	LOG_FILE   = "/Users/s02435/script/cron/goruntime_err.log"
+	LOG_DIR    = "/Users/s02435/Documents/term_logs/"
 	LOG_PREFIX = "PC-"
 )
 
