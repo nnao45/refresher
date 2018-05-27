@@ -15,8 +15,9 @@ import (
 )
 
 var (
-	version string
-	logDir  string
+	version        string
+	logDir         string
+	runtimeLogFile string
 )
 
 var (
@@ -48,7 +49,7 @@ func addog(text string, filename string) {
 func dirwalk(dir string) []string {
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
-		addog(fmt.Sprint(err, "\n"), RUNTIME_LOGFILE)
+		addog(fmt.Sprint(err, "\n"), runtimeLogFile)
 	}
 
 	var paths []string
@@ -73,6 +74,7 @@ func init() {
 		panic(err)
 	}
 	logDir = filepath.Join(usr.HomeDir, LOG_DIR)
+	runtimeLogFile = filepath.Join(logDir, RUNTIME_LOGFILE)
 
 	if _, err = os.Stat(logDir); err != nil {
 		if err := os.MkdirAll(logDir, 0700); err != nil {
@@ -99,7 +101,7 @@ func main() {
 	for i, file := range files {
 		if i > *limit {
 			if err := os.RemoveAll(file); err != nil {
-				addog(fmt.Sprint(err, "\n"), RUNTIME_LOGFILE)
+				addog(fmt.Sprint(err, "\n"), runtimeLogFile)
 			}
 		}
 	}
