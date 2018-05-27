@@ -20,9 +20,10 @@ var (
 )
 
 var (
-	app    = kingpin.New("zsh-log-refresh", "A zsh-log-refresh application.")
-	limit  = app.Flag("limit", "log refresh limit").Default("500").Int()
-	prefix = app.Flag("prefix", "search log name").Required().String()
+	app     = kingpin.New("zsh-log-refresh", "A zsh-log-refresh application.")
+	limit   = app.Flag("limit", "log refresh limit").Default("500").Int()
+	prefix  = app.Flag("prefix", "search log name").Required().String()
+	verbose = kingpin.Flag("verbose", "Verbose mode.").Short('v').Bool()
 )
 
 const (
@@ -103,5 +104,7 @@ func main() {
 		}
 	}
 
-	fmt.Println("\n", "Log refresh is done.")
+	if *verbose {
+		fmt.Println("\n", "Log refresh is done.")
+	}
 }
