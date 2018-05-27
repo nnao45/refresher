@@ -82,7 +82,7 @@ func init() {
 		}
 	}
 
-	go sh.Command("./logger.sh").Run()
+	sh.Command("./logger.sh").Run()
 }
 
 func main() {
