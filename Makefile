@@ -3,7 +3,7 @@ GO15VENDOREXPERIMENT=1
 
 NAME	 := zsh-logger
 TARGET	 := bin/$(NAME)
-VERSION  := v1.0.3
+VERSION  := v1.0.4
 DIST_DIRS := find * -type d -exec
 
 SRCS	:= $(shell find . -type f -name '*.go')
