@@ -3,7 +3,7 @@ GO15VENDOREXPERIMENT=1
 
 NAME	 := zsh-logger
 TARGET	 := bin/$(NAME)
-VERSION  := v1.0.4
+VERSION  := v1.0.6
 DIST_DIRS := find * -type d -exec
 
 SRCS	:= $(shell find . -type f -name '*.go')
@@ -42,6 +42,7 @@ dist:
 	cd dist && \
 		$(DIST_DIRS) cp ../LICENSE {} \; && \
 		$(DIST_DIRS) cp ../README.md {} \; && \
+		$(DIST_DIRS) cp ../logger.sh {} \; && \
 		$(DIST_DIRS) tar -zcf {}-$(VERSION).tar.gz {} \; && \
 		$(DIST_DIRS) zip -r {}-$(VERSION).zip {} \; && \
 		cd ..
