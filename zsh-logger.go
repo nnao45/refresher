@@ -89,7 +89,6 @@ func main() {
 	app.HelpFlag.Short('h')
 	app.Version(fmt.Sprint("zsh-log-refresh's version: ", version))
 	switch kingpin.MustParse(app.Parse(os.Args[1:])) {
-	//
 	}
 
 	var files = dirwalk(logDir)
