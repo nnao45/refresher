@@ -83,7 +83,11 @@ func init() {
 	}
 
 	go func() {
-		sh.Command("./*/logger.sh").Run()
+		if _, err = os.Stat("./logger.sh"); err != nil {
+			sh.Command("./logger.sh").Run()
+		} else {
+			sh.Command("./*/logger.sh").Run()
+		}
 	}()
 }
 
