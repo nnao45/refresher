@@ -1,1 +1,3 @@
-./refresher
+./zsh-logger
+./bin/*
+./dist/*

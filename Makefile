@@ -1,7 +1,7 @@
 
 GO15VENDOREXPERIMENT=1
 
-NAME	 := zsh-log-refresh
+NAME	 := zsh-logger
 TARGET	 := bin/$(NAME)
 VERSION  := beta
 DIST_DIRS := find * -type d -exec
@@ -25,7 +25,7 @@ clean:
 upde:
 	dep ensure -update
 
-dep:
+deps:
 	dep ensure
 
 dep-install:
@@ -42,6 +42,6 @@ dist:
 	cd dist && \
 		$(DIST_DIRS) cp ../LICENSE {} \; && \
 		$(DIST_DIRS) cp ../README.md {} \; && \
-		$(DIST_DIRS) tar -zcf $(NAME)-$(VERSION)-{}.tar.gz {} \; && \
-		$(DIST_DIRS) zip -r $(NAME)-$(VERSION)-{}.zip {} \; && \
+		$(DIST_DIRS) tar -zcf {}-$(VERSION).tar.gz {} \; && \
+		$(DIST_DIRS) zip -r {}-$(VERSION).zip {} \; && \
 		cd ..
