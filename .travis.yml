@@ -1,13 +1,20 @@
 language: go
 go:
-            - 1.9
-            - master
+- 1.9
+- master
 os:
-            - linux
-            - osx
-before_script:                 
-            - make dep-install
-            - make dep
-            - make 
+- linux
+- osx
+before_script:
+- make dep-install
+- make dep
+- make
 script:
-            - ./bin/zsh-logger --version
+- "./bin/zsh-logger --version"
+deploy:
+  provider: releases
+  api_key:
+    secure: h9IDa/WMVrxPqFGPRu+PIJ2Ggbt2HB2bvOhhIGHgEbK83CMfx6Bgb5obPUbPFHQiPyv9mVXw5CB02DoyIkSKdizbumlwuwNSQxKihdoE3S7o5/xSPM0PCSneaSPGowzxC/NAA7aMspJiMVHAROTHQaGm0E0A5CJbumdTj6V6LUrsiBIWl4WPLP6noifDq2A6PTsCABDOAowyXikYfX8HjYtqZf+zHWjS+/xVOZNo8AsPqRaYiA9IVTkG8Z94VZIxM5KMMMFWQZ5dUXSRT0vh78GGE69GACEnZPj3v69xQgiq28fU6thFL6BFv6gpzLlmH+FZrM3Nzuu6GfAkyfviNvAcbgeYgQ9b4I+dRNs54rtFm80OWGzyEsVgm3cdM+dtaJPquSEkljw4L7U0bdXW4FSdkaQSg2opLtZudcfLwiy/G5la+uHP1vCS7RVrJxgOMoA46zLZsl8Zg2nA5y2aSoOdMADKnkjHpj0bU1MUDDVAL8zPyHA/l8XWcqRf8U+AGNoRMVCoyPUdf2jpSsKes9Y6lr/2PlNuTEjtQVDcd76ch0LbaQC5tN80z6yRr67guxbBfh7YQqvD1pID+MAMQ+yGtjpWgH2Zje/SsRtl03MvnKkP6QzJ5CPdIPUo0rNQRfPlPdRzFswss0Y0R8Vm0JNsSbzxp0i4lhVhrnRNKjE=
+  file: "./dist/*.{tar.gz,zip}"
+  on:
+    repo: nnao45/zsh-logger
