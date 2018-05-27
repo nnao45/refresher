@@ -11,7 +11,6 @@ import (
 	"strings"
 
 	sh "github.com/codeskyblue/go-sh"
-	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 var (
@@ -73,6 +72,7 @@ func init() {
 		panic(err)
 	}
 	logDir = filepath.Join(usr.HomeDir, LOG_DIR)
+	os.Setenv("LOGDIR", logDir)
 	runtimeLogFile = filepath.Join(logDir, RUNTIME_LOGFILE)
 
 	if _, err = os.Stat(logDir); err != nil {
