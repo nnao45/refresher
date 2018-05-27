@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"os/user"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -13,7 +14,10 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
-var version string
+var (
+	version string
+	logDir  string
+)
 
 var (
 	app    = kingpin.New("zsh-log-refresh", "A zsh-log-refresh application.")
@@ -22,7 +26,7 @@ var (
 )
 
 const (
-	LOG_DIR         = "~/Documents/term_logs"
+	LOG_DIR         = "/Documents/term_logs"
 	RUNTIME_LOGFILE = "goruntime_err.log"
 )
 
@@ -40,6 +44,7 @@ func addog(text string, filename string) {
 	defer writeFile.Close()
 }
 
+/*
 func zshLogger() {
 	if os.Getenv("TERM") == "screen" || os.Getenv("TERM") == "screen-256color" {
 		sh.Command("tmux", "set-option", "default-terminal", "\"screen\"").Run()
@@ -47,6 +52,7 @@ func zshLogger() {
 		sh.Command("display-message", "💾Started logging to $LOGDIR/$LOGFILE").Run()
 	}
 }
+*/
 
 func dirwalk(dir string) []string {
 	files, err := ioutil.ReadDir(dir)
@@ -70,13 +76,20 @@ func dirwalk(dir string) []string {
 
 func init() {
 	var err error
-	if _, err = os.Stat(LOG_DIR); err != nil {
-		if err := os.MkdirAll(LOG_DIR, 0700); err != nil {
+
+	usr, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+	logDir = filepath.Join(usr.HomeDir, LOG_DIR)
+
+	if _, err = os.Stat(logDir); err != nil {
+		if err := os.MkdirAll(logDir, 0700); err != nil {
 			panic(err)
 		}
 	}
 
-	zshLogger()
+	sh.Command("./loggert.sh").Run()
 }
 
 func main() {
@@ -86,7 +99,7 @@ func main() {
 	//
 	}
 
-	var files = dirwalk(LOG_DIR)
+	var files = dirwalk(logDir)
 
 	sort.Slice(files, func(i, j int) bool {
 		return files[i] > files[j]
