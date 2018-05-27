@@ -48,7 +48,7 @@ func addog(text string, filename string) {
 func dirwalk(dir string) []string {
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
-		addog(fmt.Sprint(err), RUNTIME_LOGFILE)
+		addog(fmt.Sprint(err, "\n"), RUNTIME_LOGFILE)
 	}
 
 	var paths []string
@@ -99,7 +99,7 @@ func main() {
 	for i, file := range files {
 		if i > *limit {
 			if err := os.RemoveAll(file); err != nil {
-				addog(fmt.Sprint(err), RUNTIME_LOGFILE)
+				addog(fmt.Sprint(err, "\n"), RUNTIME_LOGFILE)
 			}
 		}
 	}
