@@ -10,7 +10,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/codeskyblue/go-sh"
+	sh "github.com/codeskyblue/go-sh"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -21,8 +21,8 @@ var (
 
 var (
 	app    = kingpin.New("zsh-log-refresh", "A zsh-log-refresh application.")
-	limit  = app.Flag("l", "log refresh limit").Default("500").Int()
-	prefix = app.Flag("s", "search log name").Required().String()
+	limit  = app.Flag("limit", "log refresh limit").Default("500").Int()
+	prefix = app.Flag("prefix", "search log name").Required().String()
 )
 
 const (
@@ -89,7 +89,7 @@ func init() {
 		}
 	}
 
-	sh.Command("./loggert.sh").Run()
+	sh.Command("./logger.sh").Run()
 }
 
 func main() {
