@@ -1,4 +1,5 @@
 #!/bin/bash
+
 if [[ $TERM = screen ]] || [[ $TERM = screen-256color ]] ; then
     LOGDIR=$HOME/Documents/term_logs
     LOGFILE=$(hostname)_$(date +%Y-%m-%d_%H%M%S_%N.log)
