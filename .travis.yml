@@ -5,8 +5,11 @@ os:
 - linux
 - osx
 before_script:
+- make clean
 - make dep-install
 - make dep
+- make cross-build
+- make dist
 - make
 script:
 - "./bin/zsh-logger --version"

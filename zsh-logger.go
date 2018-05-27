@@ -23,8 +23,7 @@ var (
 var (
 	app     = kingpin.New("zsh-log-refresh", "A zsh-log-refresh application.")
 	limit   = app.Flag("limit", "log refresh limit").Default("500").Int()
-	prefix  = app.Flag("prefix", "search log name").Required().String()
-	verbose = kingpin.Flag("verbose", "Verbose mode.").Short('v').Bool()
+	verbose = kingpin.Flag("verbose", "Verbose mode.").Default("false").Short('v').Bool()
 )
 
 const (
@@ -58,7 +57,7 @@ func dirwalk(dir string) []string {
 			paths = append(paths, dirwalk(filepath.Join(dir, file.Name()))...)
 			continue
 		}
-		if strings.Contains(file.Name(), *prefix) {
+		if strings.Contains(file.Name(), "zshlog_") {
 			paths = append(paths, filepath.Join(dir, file.Name()))
 		}
 	}
