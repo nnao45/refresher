@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	sh "github.com/codeskyblue/go-sh"
+	"gopkg.in/alecthomas/kingpin.v2"
 )
 
 var (
