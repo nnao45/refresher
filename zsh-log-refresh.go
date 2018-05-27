@@ -44,16 +44,6 @@ func addog(text string, filename string) {
 	defer writeFile.Close()
 }
 
-/*
-func zshLogger() {
-	if os.Getenv("TERM") == "screen" || os.Getenv("TERM") == "screen-256color" {
-		sh.Command("tmux", "set-option", "default-terminal", "\"screen\"").Run()
-		sh.Command("pipe-pane", "cat", ">>", "$LOGDIR/$LOGFILE").Run()
-		sh.Command("display-message", "💾Started logging to $LOGDIR/$LOGFILE").Run()
-	}
-}
-*/
-
 func dirwalk(dir string) []string {
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
@@ -89,7 +79,7 @@ func init() {
 		}
 	}
 
-	sh.Command("./logger.sh").Run()
+	go sh.Command("./logger.sh").Run()
 }
 
 func main() {
